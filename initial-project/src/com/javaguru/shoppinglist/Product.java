@@ -12,7 +12,7 @@ public class Product {
     private int discount;
     private String description;
 
-    public Long getId() {mn
+    public Long getId() {
         return id;
     }
 
