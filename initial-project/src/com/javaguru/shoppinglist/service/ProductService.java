@@ -14,16 +14,11 @@ public class ProductService {
 
     public Long save(Product product){
         validationService.validate(product);
-        Product createdProduct = productRepository.save(product);
-        return createdProduct.getId();
+        return productRepository.save(product).getId();
     }
 
     public Product findProductByID(Long id) {
         return productRepository.findByID(id).orElseThrow(() -> new ProductNotFoundException("Product with such ID not Found"));
-    }
-
-    public Boolean findByName(String name){
-        return productRepository.findByName(name);
     }
 
     public Set<Product> getListOfProducts(){
@@ -32,8 +27,10 @@ public class ProductService {
 
     public void updateProductNameByID(Long id, String newName){
         productRepository.findByID(id).orElseThrow(() -> new ProductNotFoundException("Product with such ID not Found"));
+        Product product = new Product();
+        product.setName(newName);
+        validationService.validate(product);
         productRepository.findByID(id).get().setName(newName);
-
     }
 
     public void deleteProductByID(Long id) {

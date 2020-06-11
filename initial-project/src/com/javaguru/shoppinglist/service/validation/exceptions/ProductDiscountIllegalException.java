@@ -5,4 +5,5 @@ public class ProductDiscountIllegalException extends RuntimeException{
     public ProductDiscountIllegalException(String message) {
         super(message);
     }
+
 }

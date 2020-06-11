@@ -15,7 +15,4 @@ public interface ProductRepository {
 
     void deleteByID(Long id);
 
-    Boolean findByName(String name);
-
-
 }

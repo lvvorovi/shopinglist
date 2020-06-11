@@ -1,14 +1,8 @@
 package com.javaguru.shoppinglist.service.validation;
 
 import com.javaguru.shoppinglist.domain.Product;
-import com.javaguru.shoppinglist.repository.ProductInMemoryRepository;
 import com.javaguru.shoppinglist.repository.ProductRepository;
-import com.javaguru.shoppinglist.service.ProductService;
-import com.javaguru.shoppinglist.service.validation.exceptions.ProductNameAlreadyExistsException;
 import com.javaguru.shoppinglist.service.validation.exceptions.ProductNameIllegalException;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ProductNameValidationRule implements ProductValidationRule {
 
@@ -28,7 +22,7 @@ public class ProductNameValidationRule implements ProductValidationRule {
         }
         for (Product entry : productRepository.getList()) {
             if (entry.getName().equals(product.getName())){
-                throw new ProductNameIllegalException("Name already exists");
+                throw new ProductNameIllegalException("Name already exist");
             }
         }
 

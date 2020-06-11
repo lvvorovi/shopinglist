@@ -1,7 +1,6 @@
 package com.javaguru.shoppinglist.repository;
 
 import com.javaguru.shoppinglist.domain.Product;
-
 import java.util.*;
 
 public class ProductInMemoryRepository implements ProductRepository {
@@ -22,15 +21,6 @@ public class ProductInMemoryRepository implements ProductRepository {
     @Override
     public Optional<Product> findByID(Long id) {
         return Optional.ofNullable(repository.get(id));
-    }
-
-    public Boolean findByName(String name) {
-        for (Product product:repository.values()) {
-            if(product.getName().equals(name)){
-                return true;
-            }
-        }
-        return false;
     }
 
     @Override
