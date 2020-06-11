@@ -1,4 +1,4 @@
-package com.javaguru.shoppinglist;
+package com.javaguru.shoppinglist.domain;
 
 import java.math.BigDecimal;
 import java.util.Objects;
@@ -9,7 +9,7 @@ public class Product {
     private String name;
     private BigDecimal price;
     private String category;
-    private int discount;
+    private float discount;
     private String description;
 
     public Long getId() {
@@ -25,9 +25,7 @@ public class Product {
     }
 
     public void setName(String name) {
-        if (name.length() >= 3 && name.length() <= 32){
             this.name = name;
-        }
     }
 
     public BigDecimal getPrice() {
@@ -35,9 +33,7 @@ public class Product {
     }
 
     public void setPrice(BigDecimal price) {
-        if ((price.compareTo(new BigDecimal(0))) > 0 ){
             this.price = price;
-        }
     }
 
     public String getCategory() {
@@ -48,14 +44,14 @@ public class Product {
         this.category = category;
     }
 
-    public int getDiscount() {
+    public float getDiscount() {
         return discount;
     }
 
-    public void setDiscount(int discount) {
-        if (discount <= 100){
+    public void setDiscount(float discount) {
+  //      if (discount <= 100){
             this.discount = discount;
-        }
+  //      }
     }
 
     public String getDescription() {
