@@ -1,6 +1,7 @@
 package com.javaguru.shoppinglist.repository;
 
 import com.javaguru.shoppinglist.domain.Product;
+
 import java.util.*;
 
 public class ProductInMemoryRepository implements ProductRepository {
@@ -24,8 +25,8 @@ public class ProductInMemoryRepository implements ProductRepository {
     }
 
     @Override
-    public Set<Product> getList() {
-        return new HashSet<>(repository.values());
+    public List<Product> findAll() {
+        return new LinkedList<>(repository.values());
     }
 
     @Override

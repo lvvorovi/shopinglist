@@ -2,10 +2,7 @@ package com.javaguru.shoppinglist;
 
 import com.javaguru.shoppinglist.domain.Product;
 import com.javaguru.shoppinglist.service.ProductService;
-import com.javaguru.shoppinglist.service.validation.exceptions.ProductDiscountIllegalException;
-import com.javaguru.shoppinglist.service.validation.exceptions.ProductNameIllegalException;
-import com.javaguru.shoppinglist.service.validation.exceptions.ProductNotFoundException;
-import com.javaguru.shoppinglist.service.validation.exceptions.ProductPriceIllegalException;
+import com.javaguru.shoppinglist.service.validation.exceptions.*;
 
 import java.math.BigDecimal;
 import java.util.Scanner;
@@ -14,14 +11,14 @@ public class Console {
 
     ProductService productService = new ProductService();
 
-    private void createProduct(){
+    private void createProduct() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter product name");
         String name = scanner.nextLine();
         System.out.println("Enter product price");
         BigDecimal price = new BigDecimal(scanner.nextLine());
         System.out.println("Enter product discount");
-        float discount = scanner.nextFloat();
+        BigDecimal discount = scanner.nextBigDecimal();
         Product product = new Product();
         product.setName(name);
         product.setPrice(price);
@@ -30,39 +27,39 @@ public class Console {
         System.out.println("Product saved with ID: " + product.getId());
     }
 
-    private void findProductByID(){
+    private void findByID() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter product id: ");
         long id = scanner.nextLong();
-        System.out.println(productService.findProductByID(id));
+        System.out.println(productService.findByID(id));
     }
 
-    private void printAllProducts(){
-        for (Product product : productService.getListOfProducts()) {
+    private void printAll() {
+        for (Product product : productService.findAll()) {
             System.out.println(product);
         }
     }
 
-    private void editProductNameByID(){
+    private void editNameByID() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter product id: ");
         long id = scanner.nextLong();
-        productService.findProductByID(id);
+        productService.findByID(id);
         System.out.println("Enter new name");
         String newName = scanner.next();
-        productService.updateProductNameByID(id, newName);
-        System.out.println(productService.findProductByID(id));
+        productService.updateNameByID(id, newName);
+        System.out.println(productService.findByID(id));
     }
 
-    private void deleteProductByID() {
+    private void deleteByID() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter product id: ");
         long id = scanner.nextLong();
-        productService.deleteProductByID(id);
+        productService.deleteByID(id);
         System.out.println("product deleted");
     }
 
-    void execute(){
+    void execute() {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
@@ -79,21 +76,21 @@ public class Console {
                         createProduct();
                         continue;
                     case 2:
-                        findProductByID();
+                        findByID();
                         continue;
                     case 3:
-                        printAllProducts();
+                        printAll();
                         continue;
                     case 4:
-                       editProductNameByID();
+                        editNameByID();
                         continue;
                     case 5:
-                        deleteProductByID();
+                        deleteByID();
                         continue;
                     case 6:
                         return;
                 }
-            } catch (ProductNameIllegalException | ProductPriceIllegalException | ProductNotFoundException | ProductDiscountIllegalException e) {
+            } catch (ValidationException e) {
                 System.out.println(e.getMessage());
             } catch (Exception e) {
                 e.printStackTrace();
@@ -101,5 +98,4 @@ public class Console {
             }
         }
     }
-
 }

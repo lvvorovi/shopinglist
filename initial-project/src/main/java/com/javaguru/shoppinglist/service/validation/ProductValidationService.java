@@ -12,12 +12,12 @@ public class ProductValidationService {
 
 
     public ProductValidationService(ProductRepository productRepository) {
-        validationRules.add(new ProductNameValidationRule(productRepository));
-        validationRules.add(new ProductPriceValidationRule());
-        validationRules.add(new ProductDiscountValidationRule());
+        validationRules.add(new NameValidationRule(productRepository));
+        validationRules.add(new PriceValidationRule());
+        validationRules.add(new DiscountValidationRule());
     }
 
-    public void validate(Product product){
+    public void validate(Product product) {
         validationRules.forEach(rule -> rule.validate(product));
     }
 
