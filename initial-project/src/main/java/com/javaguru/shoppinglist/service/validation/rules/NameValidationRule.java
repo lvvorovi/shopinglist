@@ -1,27 +1,29 @@
-package com.javaguru.shoppinglist.service.validation;
+package com.javaguru.shoppinglist.service.validation.rules;
 
-import com.javaguru.shoppinglist.domain.Product;
+import com.javaguru.shoppinglist.domain.ProductEntity;
+import com.javaguru.shoppinglist.dto.ProductDto;
 import com.javaguru.shoppinglist.repository.ProductRepository;
 import com.javaguru.shoppinglist.service.validation.exceptions.NameIllegalException;
 
 public class NameValidationRule implements ProductValidationRule {
 
-    private ProductRepository productRepository;
+    private final ProductRepository productRepository;
 
     public NameValidationRule(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
 
     @Override
-    public void validate(Product product) {
-        if (product.getName() == null) {
+    public void validate(ProductDto productDto) {
+        if (productDto.getName() == null) {
             throw new IllegalArgumentException("Name should be not null");
         }
-        if (product.getName().length() < 3 && product.getName().length() > 32) {
+        if (productDto.getName().length() < 3 && productDto.getName().length() > 32) {
             throw new NameIllegalException("Name should be 3-32 characters long");
         }
-        for (Product entry : productRepository.findAll()) {
-            if (entry.getName().equals(product.getName())) {
+        for (ProductEntity entry : productRepository.findAll()) {
+            //TODO chars to CAPS for comparison
+            if (entry.getName().equals(productDto.getName())) {
                 throw new NameIllegalException("Name already exist");
             }
         }

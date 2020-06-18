@@ -3,7 +3,7 @@ package com.javaguru.shoppinglist.domain;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-public class Product {
+public class ProductEntity {
 
     private Long id;
     private String name;
@@ -64,7 +64,7 @@ public class Product {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Product product = (Product) o;
+        ProductEntity product = (ProductEntity) o;
         return getDiscount().equals(product.getDiscount()) &&
                 getId().equals(product.getId()) &&
                 getName().equals(product.getName()) &&
@@ -80,7 +80,7 @@ public class Product {
 
     @Override
     public String toString() {
-        return "Product{" +
+        return "ProductEntity{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", price=" + price +

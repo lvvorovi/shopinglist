@@ -1,17 +1,17 @@
 package com.javaguru.shoppinglist.repository;
 
-import com.javaguru.shoppinglist.domain.Product;
+import com.javaguru.shoppinglist.domain.ProductEntity;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface ProductRepository {
 
-    Product save(Product product);
+    void save(ProductEntity product);
 
-    Optional<Product> findByID(Long ID);
+    Optional<ProductEntity> findByID(Long ID);
 
-    List<Product> findAll();
+    List<ProductEntity> findAll();
 
     void deleteByID(Long id);
 

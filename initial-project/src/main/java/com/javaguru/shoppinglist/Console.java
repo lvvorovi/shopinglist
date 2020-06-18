@@ -1,6 +1,6 @@
 package com.javaguru.shoppinglist;
 
-import com.javaguru.shoppinglist.domain.Product;
+import com.javaguru.shoppinglist.dto.ProductDto;
 import com.javaguru.shoppinglist.service.ProductService;
 import com.javaguru.shoppinglist.service.validation.exceptions.*;
 
@@ -9,7 +9,11 @@ import java.util.Scanner;
 
 public class Console {
 
-    ProductService productService = new ProductService();
+    private final ProductService productService;
+
+    public Console(ProductService productService) {
+        this.productService = productService;
+    }
 
     private void createProduct() {
         Scanner scanner = new Scanner(System.in);
@@ -17,14 +21,13 @@ public class Console {
         String name = scanner.nextLine();
         System.out.println("Enter product price");
         BigDecimal price = new BigDecimal(scanner.nextLine());
-        System.out.println("Enter product discount");
+        System.out.println("Enter product discount in %");
         BigDecimal discount = scanner.nextBigDecimal();
-        Product product = new Product();
-        product.setName(name);
-        product.setPrice(price);
-        product.setDiscount(discount);
-        productService.save(product);
-        System.out.println("Product saved with ID: " + product.getId());
+        ProductDto productDto = new ProductDto();
+        productDto.setName(name);
+        productDto.setPrice(price);
+        productDto.setDiscount(discount);
+        System.out.println(productService.save(productDto));
     }
 
     private void findByID() {
@@ -35,8 +38,8 @@ public class Console {
     }
 
     private void printAll() {
-        for (Product product : productService.findAll()) {
-            System.out.println(product);
+        for (ProductDto productDto : productService.findAll()) {
+            System.out.println(productDto);
         }
     }
 
