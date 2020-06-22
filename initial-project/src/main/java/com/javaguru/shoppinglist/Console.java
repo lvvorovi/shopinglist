@@ -43,15 +43,14 @@ public class Console {
         }
     }
 
-    private void editNameByID() {
+    private void updateNameByID() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter product id: ");
         long id = scanner.nextLong();
         productService.findByID(id);
         System.out.println("Enter new name");
         String newName = scanner.next();
-        productService.updateNameByID(id, newName);
-        System.out.println(productService.findByID(id));
+        System.out.println( productService.updateNameByID(id, newName));
     }
 
     private void deleteByID() {
@@ -85,7 +84,7 @@ public class Console {
                         printAll();
                         continue;
                     case 4:
-                        editNameByID();
+                        updateNameByID();
                         continue;
                     case 5:
                         deleteByID();

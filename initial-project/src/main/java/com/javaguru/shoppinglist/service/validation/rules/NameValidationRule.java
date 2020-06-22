@@ -7,7 +7,7 @@ import com.javaguru.shoppinglist.service.validation.exceptions.NameIllegalExcept
 
 public class NameValidationRule implements ProductValidationRule {
 
-    private final ProductRepository productRepository;
+    private ProductRepository productRepository;
 
     public NameValidationRule(ProductRepository productRepository) {
         this.productRepository = productRepository;
@@ -27,6 +27,5 @@ public class NameValidationRule implements ProductValidationRule {
                 throw new NameIllegalException("Name already exist");
             }
         }
-
     }
 }

@@ -7,14 +7,14 @@ import com.javaguru.shoppinglist.service.validation.rules.NameValidationRule;
 import com.javaguru.shoppinglist.service.validation.rules.PriceValidationRule;
 import com.javaguru.shoppinglist.service.validation.rules.ProductValidationRule;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 public class ProductValidationService {
 
-    private final Set<ProductValidationRule> validationRules = new HashSet<>();
+    private List<ProductValidationRule> validationRules;
 
-    public ProductValidationService(ProductRepository productRepository) {
+    public ProductValidationService(List<ProductValidationRule> validationRules, ProductRepository productRepository) {
+        this.validationRules = validationRules;
         validationRules.add(new NameValidationRule(productRepository));
         validationRules.add(new PriceValidationRule());
         validationRules.add(new DiscountValidationRule());
