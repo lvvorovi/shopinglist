@@ -3,71 +3,80 @@ package com.javaguru.shoppinglist.service.validation.rules;
 import com.javaguru.shoppinglist.domain.ProductEntity;
 import com.javaguru.shoppinglist.dto.ProductDto;
 import com.javaguru.shoppinglist.repository.ProductInMemoryRepository;
-import org.junit.Rule;
+import com.javaguru.shoppinglist.service.validation.exceptions.NameAlreadyExistsException;
+import com.javaguru.shoppinglist.service.validation.exceptions.NameIllegalException;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
+import org.mockito.junit.MockitoJUnitRunner;
 
-import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;
 
-import static org.mockito.Mockito.verify;
+import static org.assertj.core.api.Assertions.assertThatCode;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 public class NameValidationRuleTest {
 
     @Mock
     ProductInMemoryRepository productRepository;
     @InjectMocks
     NameValidationRule victim;
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
 
-/*    @Test
-    public void shouldThrowNameValidationExceptionDueToNullPointer() {
-        when(productRepository.findAll()).thenReturn(listEntity());
-        ProductDto dto = new ProductDto();
-        dto.setName("name");
-        dto.setPrice(new BigDecimal(100));
-        dto.setDiscount(new BigDecimal(10));
-        dto.setActualPrice(new BigDecimal(90).setScale(2));
-        dto.setId(10L);
-        //Mockito.doNothing().when(productRepository.findAll());
-        //when(productRepository.findAll()).thenReturn(productDtoNullName())
-        //TODO thrown.expectMessage("Name should be not null");
-        victim.validate(dto);
-        thrown.expect(NullPointerException.class);
-    }*/
+    ProductDto dto = new ProductDto();
 
-/*    private ProductDto productDtoNullName() {
-        ProductDto dto = new ProductDto();
-        dto.setName("name");
-        dto.setPrice(new BigDecimal(100));
-        dto.setDiscount(new BigDecimal(10));
-        dto.setActualPrice(new BigDecimal(90).setScale(2));
-        dto.setId(10L);
-        return dto;
+    @Test
+    public void shouldThrowExceptionWithNameNull() {
+
+        assertThatThrownBy(() -> victim.validate(dto)).
+                isInstanceOf(IllegalArgumentException.class).
+                hasMessage("Name should be not null");
+
     }
-    private ProductEntity productEntity() {
+
+    @Test
+    public void shouldThrowNameLengthExceptions() {
+        dto.setName("ab");
+
+        assertThatThrownBy(() -> victim.validate(dto)).
+                isInstanceOf(NameIllegalException.class).
+                hasMessage("Name should be 3-32 characters long");
+
+        dto.setName("123456789012345678901234567890123");
+
+        assertThatThrownBy(() -> victim.validate(dto)).
+                isInstanceOf(NameIllegalException.class).
+                hasMessage("Name should be 3-32 characters long");
+
+    }
+
+    @Test
+    public void shouldThrowNameAlreadyExistException() {
         ProductEntity entity = new ProductEntity();
-        entity.setName("name");
-        entity.setPrice(new BigDecimal(100));
-        entity.setDiscount(new BigDecimal(10));
-        entity.setId(10L);
-        return entity;
+        entity.setName("wrongName");
+
+        List<ProductEntity> entityList = new LinkedList<>();
+        entityList.add(entity);
+
+        when(productRepository.findAll()).thenReturn(entityList);
+
+        dto.setName("wrongName");
+
+        assertThatThrownBy(() -> victim.validate(dto)).
+                isInstanceOf(NameAlreadyExistsException.class).
+                hasMessage("Name already exist");
+
     }
-    private List<ProductEntity> listEntity() {
-        List<ProductEntity> listEntity = new LinkedList<>();
-        listEntity.add(productEntity());
-        return listEntity;
-    }*/
 
-/*    @Test
-    public void shouldThrowNameValidationExceptionDueToNameTooShort() {
+    @Test
+    public void shouldNotThrowException() {
+        dto.setName("name");
 
-    }*/
+        assertThatCode(() -> victim.validate(dto)).doesNotThrowAnyException();
+
+    }
 
 }

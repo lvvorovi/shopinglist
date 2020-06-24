@@ -9,8 +9,13 @@ public class PriceValidationRule implements ProductValidationRule {
 
     @Override
     public void validate(ProductDto productDto) {
-        if ((productDto.getPrice().compareTo(new BigDecimal(0))) <= 0) {
+        checkProductNotNull(productDto);
+
+        if (productDto.getPrice() == null) {
+            throw new IllegalArgumentException("Price should be not null");
+        } else if ((productDto.getPrice().compareTo(new BigDecimal(0))) <= 0) {
             throw new PriceIllegalException("Price must be greater than 0");
         }
     }
+
 }

@@ -9,6 +9,11 @@ public class DiscountValidationRule implements ProductValidationRule {
 
     @Override
     public void validate(ProductDto productDto) {
+        checkProductNotNull(productDto);
+
+        if (productDto.getDiscount() == null) {
+            throw new IllegalArgumentException("Discount should be not null");
+        }
         if (productDto.getDiscount().compareTo(new BigDecimal(100)) > 0
                 || productDto.getDiscount().compareTo(new BigDecimal(0)) < 0) {
             throw new DiscountIllegalException("Discount shall not be less than 0 or greater than 100");
