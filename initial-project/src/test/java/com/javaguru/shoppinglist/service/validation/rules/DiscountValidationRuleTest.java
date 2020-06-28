@@ -4,8 +4,6 @@ import com.javaguru.shoppinglist.dto.ProductDto;
 import com.javaguru.shoppinglist.service.validation.exceptions.DiscountIllegalException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 
@@ -13,7 +11,6 @@ import java.math.BigDecimal;
 
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 @RunWith(MockitoJUnitRunner.class)
