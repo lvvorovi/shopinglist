@@ -13,7 +13,7 @@ public class ProductValidationRuleTest {
     ProductDto dto;
 
     @Test
-    public void shouldThrowExceptionForNullProduct() {
+    public void shouldThrowNullProductException() {
 
         assertThatThrownBy(() -> victim.checkProductNotNull(dto)).
                 isInstanceOf(IllegalArgumentException.class).

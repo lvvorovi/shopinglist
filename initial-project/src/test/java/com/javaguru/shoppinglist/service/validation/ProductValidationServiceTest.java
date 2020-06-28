@@ -40,6 +40,15 @@ public class ProductValidationServiceTest {
         victim = new ProductValidationService(validationRules);
     }
 
+    private ProductDto productDto() {
+        ProductDto dto = new ProductDto();
+        dto.setName("name");
+        dto.setPrice(new BigDecimal(100));
+        dto.setDiscount(new BigDecimal(10));
+        dto.setActualPrice(new BigDecimal(90).setScale(2, RoundingMode.HALF_EVEN));
+        dto.setId(10L);
+        return dto;
+    }
 
     @Test
     public void shouldValidateForEachRule() {
@@ -51,16 +60,6 @@ public class ProductValidationServiceTest {
 
         captor.getAllValues().forEach(product -> assertEquals(input, product));
 
-    }
-
-    private ProductDto productDto() {
-        ProductDto dto = new ProductDto();
-        dto.setName("name");
-        dto.setPrice(new BigDecimal(100));
-        dto.setDiscount(new BigDecimal(10));
-        dto.setActualPrice(new BigDecimal(90).setScale(2, RoundingMode.HALF_EVEN));
-        dto.setId(10L);
-        return dto;
     }
 
 }

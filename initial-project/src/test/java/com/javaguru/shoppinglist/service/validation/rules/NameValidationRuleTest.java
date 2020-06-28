@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.LinkedList;
@@ -16,13 +17,15 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class NameValidationRuleTest {
 
     @Mock
     ProductInMemoryRepository productRepository;
+    @Spy
     @InjectMocks
     NameValidationRule victim;
 
@@ -30,10 +33,11 @@ public class NameValidationRuleTest {
 
     @Test
     public void shouldThrowExceptionWithNameNull() {
-
         assertThatThrownBy(() -> victim.validate(dto)).
                 isInstanceOf(IllegalArgumentException.class).
                 hasMessage("Name should be not null");
+
+        verify(victim).checkProductNotNull(dto);
 
     }
 
@@ -51,6 +55,7 @@ public class NameValidationRuleTest {
                 isInstanceOf(NameIllegalException.class).
                 hasMessage("Name should be 3-32 characters long");
 
+        verify(victim, times(2)).checkProductNotNull(dto);
     }
 
     @Test
@@ -69,6 +74,7 @@ public class NameValidationRuleTest {
                 isInstanceOf(NameAlreadyExistsException.class).
                 hasMessage("Name already exist");
 
+        verify(victim).checkProductNotNull(dto);
     }
 
     @Test
@@ -77,6 +83,7 @@ public class NameValidationRuleTest {
 
         assertThatCode(() -> victim.validate(dto)).doesNotThrowAnyException();
 
+        verify(victim).checkProductNotNull(dto);
     }
 
 }
