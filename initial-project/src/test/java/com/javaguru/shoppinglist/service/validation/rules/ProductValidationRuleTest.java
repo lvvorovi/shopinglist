@@ -14,18 +14,16 @@ public class ProductValidationRuleTest {
 
     @Test
     public void shouldThrowNullProductException() {
-
-        assertThatThrownBy(() -> victim.checkProductNotNull(dto)).
-                isInstanceOf(IllegalArgumentException.class).
-                hasMessage("Product should be not null");
-
+        assertThatThrownBy(() -> victim.checkProductNotNull(dto))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("Product should be not null");
     }
 
     @Test
     public void shouldNotThrowException() {
         dto = new ProductDto();
 
-        assertThatCode(() -> victim.checkProductNotNull(dto)).
-                doesNotThrowAnyException();
+        assertThatCode(() -> victim.checkProductNotNull(dto))
+                .doesNotThrowAnyException();
     }
 }

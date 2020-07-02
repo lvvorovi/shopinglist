@@ -59,7 +59,6 @@ public class ProductValidationServiceTest {
         verify(priceValidationRule).validate(captor.capture());
 
         captor.getAllValues().forEach(product -> assertEquals(input, product));
-
     }
 
 }

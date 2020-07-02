@@ -32,27 +32,26 @@ public class NameValidationRuleTest {
 
     @Test
     public void shouldThrowExceptionWithNameNull() {
-        assertThatThrownBy(() -> victim.validate(dto)).
-                isInstanceOf(IllegalArgumentException.class).
-                hasMessage("Name should be not null");
+        assertThatThrownBy(() -> victim.validate(dto))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("Name should be not null");
 
         verify(victim).checkProductNotNull(dto);
-
     }
 
     @Test
     public void shouldThrowNameLengthExceptions() {
         dto.setName("ab");
 
-        assertThatThrownBy(() -> victim.validate(dto)).
-                isInstanceOf(NameIllegalException.class).
-                hasMessage("Name should be 3-32 characters long");
+        assertThatThrownBy(() -> victim.validate(dto))
+                .isInstanceOf(NameIllegalException.class)
+                .hasMessage("Name should be 3-32 characters long");
 
         dto.setName("123456789012345678901234567890123");
 
-        assertThatThrownBy(() -> victim.validate(dto)).
-                isInstanceOf(NameIllegalException.class).
-                hasMessage("Name should be 3-32 characters long");
+        assertThatThrownBy(() -> victim.validate(dto))
+                .isInstanceOf(NameIllegalException.class)
+                .hasMessage("Name should be 3-32 characters long");
 
         verify(victim, times(2)).checkProductNotNull(dto);
     }
@@ -69,9 +68,9 @@ public class NameValidationRuleTest {
 
         dto.setName("wrongName");
 
-        assertThatThrownBy(() -> victim.validate(dto)).
-                isInstanceOf(NameAlreadyExistsException.class).
-                hasMessage("Name already exist");
+        assertThatThrownBy(() -> victim.validate(dto))
+                .isInstanceOf(NameAlreadyExistsException.class)
+                .hasMessage("Name already exist");
 
         verify(victim).checkProductNotNull(dto);
     }

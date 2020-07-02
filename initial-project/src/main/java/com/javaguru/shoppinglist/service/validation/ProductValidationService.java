@@ -14,7 +14,6 @@ public class ProductValidationService {
     }
 
     public void validate(ProductDto productDto) {
-
         validationRuleList.forEach(rule -> rule.validate(productDto));
     }
 

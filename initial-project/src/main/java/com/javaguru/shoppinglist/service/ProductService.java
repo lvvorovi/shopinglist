@@ -31,8 +31,8 @@ public class ProductService {
     }
 
     public ProductDto findByID(Long id) {
-        ProductEntity entity = productRepository.findByID(id).
-                orElseThrow(() -> new ProductNotFoundException("Product with such ID not Found"));
+        ProductEntity entity = productRepository.findByID(id)
+                .orElseThrow(() -> new ProductNotFoundException("Product with such ID not Found"));
         return productMapper.toDto(entity);
     }
 
@@ -46,7 +46,8 @@ public class ProductService {
     }
 
     public ProductDto updateNameByID(Long id, String newName) {
-        ProductEntity updatedEntity = productRepository.findByID(id).orElseThrow(() -> new ProductNotFoundException("Product with such ID not Found"));
+        ProductEntity updatedEntity = productRepository.findByID(id)
+                .orElseThrow(() -> new ProductNotFoundException("Product with such ID not Found"));
         ProductDto productDto = new ProductDto();
         productDto.setName(newName);
         productDto.setPrice(new BigDecimal(1));
@@ -57,7 +58,8 @@ public class ProductService {
     }
 
     public void deleteByID(Long id) {
-        productRepository.findByID(id).orElseThrow(() -> new ProductNotFoundException("Product with such ID not Found"));
+        productRepository.findByID(id)
+                .orElseThrow(() -> new ProductNotFoundException("Product with such ID not Found"));
         productRepository.deleteByID(id);
     }
 }

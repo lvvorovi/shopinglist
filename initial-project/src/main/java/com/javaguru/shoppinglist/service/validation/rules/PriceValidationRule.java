@@ -13,7 +13,8 @@ public class PriceValidationRule implements ProductValidationRule {
 
         if (productDto.getPrice() == null) {
             throw new IllegalArgumentException("Price should be not null");
-        } else if ((productDto.getPrice().compareTo(new BigDecimal(0))) <= 0) {
+        }
+        if ((productDto.getPrice().compareTo(new BigDecimal(0))) <= 0) {
             throw new PriceIllegalException("Price must be greater than 0");
         }
     }

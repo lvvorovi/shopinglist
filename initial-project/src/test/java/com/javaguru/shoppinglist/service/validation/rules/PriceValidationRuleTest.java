@@ -12,6 +12,7 @@ import java.math.BigDecimal;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.verify;
+
 @RunWith(MockitoJUnitRunner.class)
 public class PriceValidationRuleTest {
 
@@ -21,19 +22,18 @@ public class PriceValidationRuleTest {
 
     @Test
     public void shouldThrowPriceNullException() {
-        assertThatThrownBy(() -> victim.validate(dto)).
-                isInstanceOf(IllegalArgumentException.class).
-                hasMessage("Price should be not null");
-
+        assertThatThrownBy(() -> victim.validate(dto))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("Price should be not null");
     }
 
     @Test
     public void shouldThrowPriceGreaterThanZeroException() {
         dto.setPrice(new BigDecimal(0));
 
-        assertThatThrownBy(() -> victim.validate(dto)).
-                isInstanceOf(PriceIllegalException.class).
-                hasMessage("Price must be greater than 0");
+        assertThatThrownBy(() -> victim.validate(dto))
+                .isInstanceOf(PriceIllegalException.class)
+                .hasMessage("Price must be greater than 0");
 
         verify(victim).checkProductNotNull(dto);
     }

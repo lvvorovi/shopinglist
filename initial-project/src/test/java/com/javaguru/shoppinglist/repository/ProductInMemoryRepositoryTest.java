@@ -42,8 +42,8 @@ public class ProductInMemoryRepositoryTest {
     public void shouldSaveWithIdZeroAndFindByIdZero() {
         victim.save(productEntity());
 
-        assertEquals(productEntity(), victim.findByID(0L).
-                orElseThrow(() -> new ProductNotFoundException("Product with such ID not Found")));
+        assertEquals(productEntity(), victim.findByID(0L)
+                .orElseThrow(() -> new ProductNotFoundException("Product with such ID not Found")));
     }
 
     @Test

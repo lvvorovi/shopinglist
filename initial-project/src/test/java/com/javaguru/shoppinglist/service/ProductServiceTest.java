@@ -136,9 +136,8 @@ public class ProductServiceTest extends TestCase {
     public void shouldThrowProductNotFoundExceptionWhenFindById() {
         when(productRepository.findByID(any())).thenReturn(Optional.ofNullable(null));
 
-        assertThatThrownBy(() -> victim.findByID(any())).
-                isInstanceOf(ProductNotFoundException.class).
-                hasMessage("Product with such ID not Found");
-
+        assertThatThrownBy(() -> victim.findByID(any()))
+                .isInstanceOf(ProductNotFoundException.class)
+                .hasMessage("Product with such ID not Found");
     }
 }

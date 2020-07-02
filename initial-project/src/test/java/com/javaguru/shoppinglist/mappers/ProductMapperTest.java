@@ -11,6 +11,8 @@ import static org.junit.Assert.assertEquals;
 
 public class ProductMapperTest {
 
+    private ProductMapper victim = new ProductMapper();
+
     private ProductDto productDto() {
         ProductDto dto = new ProductDto();
         dto.setName("name");
@@ -30,19 +32,14 @@ public class ProductMapperTest {
         return entity;
     }
 
-    ProductDto dto = productDto();
-    ProductEntity entity = productEntity();
-
-    ProductMapper victim = new ProductMapper();
-
     @Test
     public void shouldMapEntityToDto() {
-        assertEquals(dto, victim.toDto(entity));
+        assertEquals(productDto(), victim.toDto(productEntity()));
     }
 
     @Test
     public void shouldMapDtoToEntity() {
-        assertEquals(entity, victim.toEntity(dto));
+        assertEquals(productEntity(), victim.toEntity(productDto()));
     }
 
 }
