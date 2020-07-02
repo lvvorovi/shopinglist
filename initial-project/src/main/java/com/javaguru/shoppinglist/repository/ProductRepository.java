@@ -13,6 +13,8 @@ public interface ProductRepository {
 
     List<ProductEntity> findAll();
 
+    Optional<ProductEntity> findByName(String name);
+
     void deleteByID(Long id);
 
 }

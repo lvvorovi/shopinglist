@@ -8,11 +8,11 @@ import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class ProductInMemoryRepositoryTest {
 
-    ProductRepository victim = new ProductInMemoryRepository();
+    final ProductRepository victim = new ProductInMemoryRepository();
 
     private ProductEntity productEntity() {
         ProductEntity entity = new ProductEntity();

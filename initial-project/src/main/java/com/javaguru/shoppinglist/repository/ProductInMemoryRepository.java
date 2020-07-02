@@ -22,7 +22,19 @@ public class ProductInMemoryRepository implements ProductRepository {
 
     @Override
     public List<ProductEntity> findAll() {
-        return new LinkedList<>(repository.values());
+        return new ArrayList<>(repository.values());
+    }
+
+    @Override
+    public Optional<ProductEntity> findByName(String name) {
+        for (ProductEntity entry : findAll()) {
+            if (entry.getName().equals(name)) {
+                return Optional.of(entry);
+            }
+        }
+
+
+        return Optional.empty();
     }
 
     @Override

@@ -16,7 +16,7 @@ import static org.mockito.Mockito.verify;
 @RunWith(MockitoJUnitRunner.class)
 public class PriceValidationRuleTest {
 
-    ProductDto dto = new ProductDto();
+    final ProductDto dto = new ProductDto();
     @Spy
     PriceValidationRule victim;
 

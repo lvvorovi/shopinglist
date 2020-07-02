@@ -1,11 +1,16 @@
 package com.javaguru.shoppinglist.service.validation;
 
 import com.javaguru.shoppinglist.dto.ProductDto;
-import com.javaguru.shoppinglist.service.validation.rules.*;
+import com.javaguru.shoppinglist.service.validation.rules.DiscountValidationRule;
+import com.javaguru.shoppinglist.service.validation.rules.NameValidationRule;
+import com.javaguru.shoppinglist.service.validation.rules.PriceValidationRule;
+import com.javaguru.shoppinglist.service.validation.rules.ProductValidationRule;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.*;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
+import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.math.BigDecimal;
@@ -13,7 +18,7 @@ import java.math.RoundingMode;
 import java.util.LinkedList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -28,7 +33,7 @@ public class ProductValidationServiceTest {
     @Captor
     private ArgumentCaptor<ProductDto> captor;
 
-    ProductDto input = productDto();
+    final ProductDto input = productDto();
     ProductValidationService victim;
 
     @Before

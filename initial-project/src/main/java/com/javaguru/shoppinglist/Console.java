@@ -2,7 +2,7 @@ package com.javaguru.shoppinglist;
 
 import com.javaguru.shoppinglist.dto.ProductDto;
 import com.javaguru.shoppinglist.service.ProductService;
-import com.javaguru.shoppinglist.service.validation.exceptions.*;
+import com.javaguru.shoppinglist.service.validation.exceptions.ValidationException;
 
 import java.math.BigDecimal;
 import java.util.Scanner;
@@ -23,10 +23,16 @@ public class Console {
         BigDecimal price = new BigDecimal(scanner.nextLine());
         System.out.println("Enter product discount in %");
         BigDecimal discount = scanner.nextBigDecimal();
+        System.out.println("Enter product description");
+        String description = scanner.nextLine();
+        System.out.println("Enter product category");
+        String category = scanner.nextLine();
         ProductDto productDto = new ProductDto();
         productDto.setName(name);
         productDto.setPrice(price);
         productDto.setDiscount(discount);
+        productDto.setDescription(description);
+        productDto.setCategory(category);
         System.out.println(productService.save(productDto));
     }
 
@@ -43,14 +49,25 @@ public class Console {
         }
     }
 
-    private void updateNameByID() {
+    private void updateByID() {
+        ProductDto temporaryDto = new ProductDto();
+
         Scanner scanner = new Scanner(System.in);
+
         System.out.println("Enter product id: ");
         long id = scanner.nextLong();
-        productService.findByID(id);
+        System.out.println(productService.findByID(id));
         System.out.println("Enter new name");
-        String newName = scanner.next();
-        System.out.println(productService.updateNameByID(id, newName));
+        temporaryDto.setName(scanner.next());
+        System.out.println("Enter new description");
+        temporaryDto.setDescription(scanner.next());
+        System.out.println("Enter new category");
+        temporaryDto.setCategory(scanner.next());
+        System.out.println("Enter new price");
+        temporaryDto.setPrice(scanner.nextBigDecimal());
+        System.out.println("Enter new discount");
+        temporaryDto.setDiscount(scanner.nextBigDecimal());
+        System.out.println(productService.updateByID(id, temporaryDto));
     }
 
     private void deleteByID() {
@@ -84,7 +101,7 @@ public class Console {
                         printAll();
                         continue;
                     case 4:
-                        updateNameByID();
+                        updateByID();
                         continue;
                     case 5:
                         deleteByID();

@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class ProductValidationRuleTest {
 
-    ProductValidationRule victim = new PriceValidationRule();
+    final ProductValidationRule victim = new PriceValidationRule();
 
     ProductDto dto;
 

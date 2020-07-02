@@ -12,8 +12,7 @@ import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -28,7 +27,8 @@ public class NameValidationRuleTest {
     @InjectMocks
     NameValidationRule victim;
 
-    ProductDto dto = new ProductDto();
+    final ProductDto dto = new ProductDto();
+    final ProductEntity entity = new ProductEntity();
 
     @Test
     public void shouldThrowExceptionWithNameNull() {
@@ -58,15 +58,8 @@ public class NameValidationRuleTest {
 
     @Test
     public void shouldThrowNameAlreadyExistException() {
-        ProductEntity entity = new ProductEntity();
-        entity.setName("wrongName");
-
-        List<ProductEntity> entityList = new LinkedList<>();
-        entityList.add(entity);
-
-        when(productRepository.findAll()).thenReturn(entityList);
-
-        dto.setName("wrongName");
+        dto.setName("testName");
+        when(productRepository.findByName(any())).thenReturn(Optional.of(entity));
 
         assertThatThrownBy(() -> victim.validate(dto))
                 .isInstanceOf(NameAlreadyExistsException.class)

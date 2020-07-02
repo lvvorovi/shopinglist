@@ -20,7 +20,7 @@ public class DiscountValidationRuleTest {
     @Spy
     DiscountValidationRule victim;
 
-    ProductDto dto = new ProductDto();
+    final ProductDto dto = new ProductDto();
 
     @Test
     public void shouldThrowDiscountNullException() {

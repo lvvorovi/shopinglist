@@ -11,7 +11,7 @@ import static org.junit.Assert.assertEquals;
 
 public class ProductMapperTest {
 
-    private ProductMapper victim = new ProductMapper();
+    private final ProductMapper victim = new ProductMapper();
 
     private ProductDto productDto() {
         ProductDto dto = new ProductDto();

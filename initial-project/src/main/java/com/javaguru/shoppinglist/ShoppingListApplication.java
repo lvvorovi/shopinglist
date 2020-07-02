@@ -5,7 +5,10 @@ import com.javaguru.shoppinglist.repository.ProductInMemoryRepository;
 import com.javaguru.shoppinglist.repository.ProductRepository;
 import com.javaguru.shoppinglist.service.ProductService;
 import com.javaguru.shoppinglist.service.validation.ProductValidationService;
-import com.javaguru.shoppinglist.service.validation.rules.*;
+import com.javaguru.shoppinglist.service.validation.rules.DiscountValidationRule;
+import com.javaguru.shoppinglist.service.validation.rules.NameValidationRule;
+import com.javaguru.shoppinglist.service.validation.rules.PriceValidationRule;
+import com.javaguru.shoppinglist.service.validation.rules.ProductValidationRule;
 
 import java.util.LinkedList;
 import java.util.List;

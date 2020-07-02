@@ -24,13 +24,17 @@
         <artifactId>assertj-core</artifactId>
         <version>3.12.0</version>
         <scope>test</scope>
-    </dependency>
-       <!-- <dependency>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>4.2.2.RELEASE</version>
+        </dependency>
+        <dependency>
             <groupId>org.jetbrains</groupId>
             <artifactId>annotations</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>-->
+            <version>16.0.2</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

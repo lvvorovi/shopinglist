@@ -7,8 +7,7 @@ import com.javaguru.shoppinglist.repository.ProductRepository;
 import com.javaguru.shoppinglist.service.validation.ProductValidationService;
 import com.javaguru.shoppinglist.service.validation.exceptions.ProductNotFoundException;
 
-import java.math.BigDecimal;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductService {
@@ -32,34 +31,33 @@ public class ProductService {
 
     public ProductDto findByID(Long id) {
         ProductEntity entity = productRepository.findByID(id)
-                .orElseThrow(() -> new ProductNotFoundException("Product with such ID not Found"));
+                .orElseThrow(() -> new ProductNotFoundException("Product with ID " + id + " not Found"));
         return productMapper.toDto(entity);
     }
 
-
     public List<ProductDto> findAll() {
-        List<ProductDto> listDto = new LinkedList<>();
+        List<ProductDto> listDto = new ArrayList<>();
         for (ProductEntity entity : productRepository.findAll()) {
             listDto.add(productMapper.toDto(entity));
         }
         return listDto;
     }
 
-    public ProductDto updateNameByID(Long id, String newName) {
+    public ProductDto updateByID(Long id, ProductDto dto) {
+        validationService.validate(dto);
         ProductEntity updatedEntity = productRepository.findByID(id)
-                .orElseThrow(() -> new ProductNotFoundException("Product with such ID not Found"));
-        ProductDto productDto = new ProductDto();
-        productDto.setName(newName);
-        productDto.setPrice(new BigDecimal(1));
-        productDto.setDiscount(new BigDecimal(0));
-        validationService.validate(productDto);
-        updatedEntity.setName(newName);
+                .orElseThrow(() -> new ProductNotFoundException("Product with ID " + id + " not Found"));
+        updatedEntity.setName(dto.getName());
+        updatedEntity.setDiscount(dto.getDiscount());
+        updatedEntity.setCategory(dto.getCategory());
+        updatedEntity.setPrice(dto.getPrice());
+        updatedEntity.setDescription(dto.getDescription());
         return productMapper.toDto(updatedEntity);
     }
 
     public void deleteByID(Long id) {
         productRepository.findByID(id)
-                .orElseThrow(() -> new ProductNotFoundException("Product with such ID not Found"));
+                .orElseThrow(() -> new ProductNotFoundException("Product with ID " + id + " not Found"));
         productRepository.deleteByID(id);
     }
 }
