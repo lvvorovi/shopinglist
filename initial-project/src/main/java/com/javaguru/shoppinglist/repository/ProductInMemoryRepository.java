@@ -9,9 +9,6 @@ public class ProductInMemoryRepository implements ProductRepository {
     private final Map<Long, ProductEntity> repository = new HashMap<>();
     private Long productIdSequence = 0L;
 
-    public ProductInMemoryRepository() {
-    }
-
     @Override
     public void save(ProductEntity product) {
         product.setId(productIdSequence++);
