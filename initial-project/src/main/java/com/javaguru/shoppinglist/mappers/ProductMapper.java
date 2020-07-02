@@ -16,7 +16,7 @@ public class ProductMapper {
         dto.setDiscount(entity.getDiscount());
         dto.setCategory(entity.getCategory());
         dto.setDescription(entity.getDescription());
-        dto.setActualPrice(actualPriceCalculation(entity.getPrice(), entity.getDiscount()));
+        dto.setActualPrice(toActualPrice(entity.getPrice(), entity.getDiscount()));
         return dto;
     }
 
@@ -32,7 +32,7 @@ public class ProductMapper {
         return entity;
     }
 
-    private BigDecimal actualPriceCalculation(BigDecimal price, BigDecimal discount) {
+    private BigDecimal toActualPrice(BigDecimal price, BigDecimal discount) {
         return price.multiply(new BigDecimal(1).subtract(discount
                 .divide(new BigDecimal(100), 2, RoundingMode.HALF_EVEN)));
     }
