@@ -1,26 +1,22 @@
 package com.javaguru.shoppinglist.service.validation;
 
-import com.javaguru.shoppinglist.domain.ProductEntity;
 import com.javaguru.shoppinglist.dto.ProductDto;
-import com.javaguru.shoppinglist.repository.ProductInMemoryRepository;
-import com.javaguru.shoppinglist.repository.ProductRepository;
-import com.javaguru.shoppinglist.service.validation.rules.DiscountValidationRule;
-import com.javaguru.shoppinglist.service.validation.rules.NameValidationRule;
-import com.javaguru.shoppinglist.service.validation.rules.PriceValidationRule;
-import com.javaguru.shoppinglist.service.validation.rules.ProductValidationRule;
+import com.javaguru.shoppinglist.service.validation.rules.*;
+import org.junit.Before;
 import org.junit.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
+import org.junit.runner.RunWith;
+import org.mockito.*;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.LinkedList;
 import java.util.List;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 public class ProductValidationServiceTest {
 
     @Mock
@@ -29,21 +25,19 @@ public class ProductValidationServiceTest {
     DiscountValidationRule discountValidationRule;
     @Mock
     PriceValidationRule priceValidationRule;
-    @Mock
-    List<ProductValidationRule> validationRules;
-    @Mock
-    ProductInMemoryRepository productRepository;
-    @InjectMocks
+    @Captor
+    private ArgumentCaptor<ProductDto> captor;
+
+    ProductDto input = productDto();
     ProductValidationService victim;
 
-/*    @Test
-    public void shouldValidateForEachRule() {
-        when(
-        victim.validate(productDto());
-        verify(validationRules).add(new NameValidationRule(productRepository));
-        verify(validationRules).add(new DiscountValidationRule());
-        verify(validationRules).add(new PriceValidationRule());
-
+    @Before
+    public void setUp() {
+        List<ProductValidationRule> validationRules = new LinkedList<>();
+        validationRules.add(nameValidationRule);
+        validationRules.add(discountValidationRule);
+        validationRules.add(priceValidationRule);
+        victim = new ProductValidationService(validationRules);
     }
 
     private ProductDto productDto() {
@@ -51,9 +45,20 @@ public class ProductValidationServiceTest {
         dto.setName("name");
         dto.setPrice(new BigDecimal(100));
         dto.setDiscount(new BigDecimal(10));
-        dto.setActualPrice(new BigDecimal(90).setScale(2));
+        dto.setActualPrice(new BigDecimal(90).setScale(2, RoundingMode.HALF_EVEN));
         dto.setId(10L);
         return dto;
-    }*/
+    }
+
+    @Test
+    public void shouldValidateForEachRule() {
+        victim.validate(input);
+
+        verify(nameValidationRule).validate(captor.capture());
+        verify(discountValidationRule).validate(captor.capture());
+        verify(priceValidationRule).validate(captor.capture());
+
+        captor.getAllValues().forEach(product -> assertEquals(input, product));
+    }
 
 }

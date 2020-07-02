@@ -50,7 +50,7 @@ public class Console {
         productService.findByID(id);
         System.out.println("Enter new name");
         String newName = scanner.next();
-        System.out.println( productService.updateNameByID(id, newName));
+        System.out.println(productService.updateNameByID(id, newName));
     }
 
     private void deleteByID() {
