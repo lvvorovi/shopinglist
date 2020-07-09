@@ -7,9 +7,8 @@ import org.junit.Test;
 import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 
-import static org.assertj.core.api.Assertions.assertThatObject;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 
 public class ProductInMemoryRepositoryTest {
@@ -55,8 +54,8 @@ public class ProductInMemoryRepositoryTest {
 
     @Test
     public void shouldNotFindByIdAndByName() {
-        assertThatObject(victim.findByName("name")).isSameAs(Optional.empty());
-        assertThatObject(victim.findByID(0L)).isSameAs(Optional.empty());
+        assertThat(victim.findByID(0L)).isEmpty();
+        assertThat(victim.findByName("name")).isEmpty();
     }
 
     @Test

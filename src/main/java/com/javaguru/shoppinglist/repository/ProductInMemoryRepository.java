@@ -34,7 +34,7 @@ public class ProductInMemoryRepository implements ProductRepository {
                 return Optional.of(entry);
             }
         }
-        return Optional.ofNullable(null);
+        return Optional.empty();
     }
 
     @Override
