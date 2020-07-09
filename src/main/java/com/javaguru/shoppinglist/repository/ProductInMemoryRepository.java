@@ -29,7 +29,7 @@ public class ProductInMemoryRepository implements ProductRepository {
 
     @Override
     public Optional<ProductEntity> findByName(String name) {
-        for (ProductEntity entry : findAll()) {
+        for (ProductEntity entry : repository.values()) {
             if (entry.getName().equals(name)) {
                 return Optional.of(entry);
             }
