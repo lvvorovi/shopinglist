@@ -1,19 +1,17 @@
 package com.javaguru.shoppinglist.service.validation.rules;
 
-import com.javaguru.shoppinglist.domain.ProductEntity;
-import com.javaguru.shoppinglist.dto.ProductDto;
-import com.javaguru.shoppinglist.repository.ProductInMemoryRepository;
+import com.javaguru.shoppinglist.repository.ProductSqlRepository;
 import com.javaguru.shoppinglist.service.validation.exceptions.NameAlreadyExistsException;
 import com.javaguru.shoppinglist.service.validation.exceptions.NameIllegalException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.Optional;
-
+import static com.javaguru.shoppinglist.TestProductConstructors.*;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.*;
@@ -21,59 +19,53 @@ import static org.mockito.Mockito.*;
 @RunWith(MockitoJUnitRunner.class)
 public class NameValidationRuleTest {
 
-    final ProductDto dto = new ProductDto();
-    final ProductEntity entity = new ProductEntity();
     @Mock
-    ProductInMemoryRepository productRepository;
+    ProductSqlRepository productRepository;
     @Spy
     @InjectMocks
     NameValidationRule victim;
 
     @Test
     public void shouldThrowExceptionWithNameNull() {
-        assertThatThrownBy(() -> victim.validate(dto))
+        assertThatThrownBy(() -> victim.validate(productDtoAllValuesNull()))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("Name should be not null");
 
-        verify(victim).checkProductNotNull(dto);
+        verify(victim).checkProductNotNull(productDtoAllValuesNull());
     }
 
     @Test
     public void shouldThrowNameLengthExceptions() {
-        dto.setName("ab");
-
-        assertThatThrownBy(() -> victim.validate(dto))
+        assertThatThrownBy(() -> victim.validate(productDtoAllValuesTooSmall()))
                 .isInstanceOf(NameIllegalException.class)
                 .hasMessage("Name should be 3-32 characters long");
 
-        dto.setName("123456789012345678901234567890123");
-
-        assertThatThrownBy(() -> victim.validate(dto))
+        assertThatThrownBy(() -> victim.validate(productDtoAllValuesTooBig()))
                 .isInstanceOf(NameIllegalException.class)
                 .hasMessage("Name should be 3-32 characters long");
 
-        verify(victim, times(2)).checkProductNotNull(dto);
+        verify(victim).checkProductNotNull(productDtoAllValuesTooSmall());
+        verify(victim).checkProductNotNull(productDtoAllValuesTooBig());
     }
 
     @Test
     public void shouldThrowNameAlreadyExistException() {
-        dto.setName("testName");
-        when(productRepository.findByName(any())).thenReturn(Optional.of(entity));
+        when(productRepository.isByName(any())).thenReturn(true);
 
-        assertThatThrownBy(() -> victim.validate(dto))
+        assertThatThrownBy(() -> victim.validate(productDto()))
                 .isInstanceOf(NameAlreadyExistsException.class)
                 .hasMessage("Name already exist");
 
-        verify(victim).checkProductNotNull(dto);
+        verify(victim).checkProductNotNull(productDto());
     }
 
     @Test
     public void shouldNotThrowException() {
-        dto.setName("name");
+        Mockito.when(productRepository.isByName(any())).thenReturn(false);
 
-        assertThatCode(() -> victim.validate(dto)).doesNotThrowAnyException();
+        assertThatCode(() -> victim.validate(productDto())).doesNotThrowAnyException();
 
-        verify(victim).checkProductNotNull(dto);
+        verify(victim).checkProductNotNull(productDto());
     }
 
 }

@@ -8,9 +8,17 @@ public class ProductEntity {
     private Long id;
     private String name;
     private BigDecimal price;
-    private String category;
     private BigDecimal discount;
     private String description;
+    private String sku;
+
+    public String getSku() {
+        return sku;
+    }
+
+    public void setSku(String sku) {
+        this.sku = sku;
+    }
 
     public Long getId() {
         return id;
@@ -34,14 +42,6 @@ public class ProductEntity {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
     }
 
     public BigDecimal getDiscount() {
@@ -69,13 +69,13 @@ public class ProductEntity {
                 getId().equals(product.getId()) &&
                 getName().equals(product.getName()) &&
                 getPrice().equals(product.getPrice()) &&
-                Objects.equals(getCategory(), product.getCategory()) &&
+                getSku().equals(product.getSku()) &&
                 Objects.equals(getDescription(), product.getDescription());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), getPrice(), getCategory(), getDiscount(), getDescription());
+        return Objects.hash(getId(), getName(), getPrice(), getDiscount(), getSku(), getDescription());
     }
 
     @Override
@@ -84,8 +84,8 @@ public class ProductEntity {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", price=" + price +
-                ", category='" + category + '\'' +
                 ", discount=" + discount +
+                ", SKU=" + sku +
                 ", description='" + description + '\'' +
                 '}';
     }

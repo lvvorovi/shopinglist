@@ -23,7 +23,7 @@ public class Console {
                 Scanner scanner = new Scanner(System.in);
 
                 for (int i = 0; i < actions.size(); i++) {
-                    System.out.println((i + 1) + ". " + actions.get(i));
+                    System.out.println((i + 1) + ". " + actions.get(i).getName());
                 }
                 int userInput = Integer.parseInt(scanner.nextLine());
                 if (userInput < 1 || userInput > 6) {

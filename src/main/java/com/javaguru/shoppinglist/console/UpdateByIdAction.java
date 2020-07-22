@@ -5,7 +5,6 @@ import com.javaguru.shoppinglist.service.ProductService;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-import java.math.BigDecimal;
 import java.util.Scanner;
 
 @Component
@@ -21,27 +20,15 @@ public class UpdateByIdAction implements MenuAction {
     @Override
     public void execute() {
         Scanner scanner = new Scanner(System.in);
-
-        ProductDto temporaryDto = new ProductDto();
-
-        System.out.println("Enter product id: ");
+        System.out.println("Enter product ID: ");
         long id = Long.parseLong(scanner.nextLine());
-        System.out.println(productService.findByID(id));
-        System.out.println("Enter new name");
-        temporaryDto.setName(scanner.nextLine());
-        System.out.println("Enter new description");
-        temporaryDto.setDescription(scanner.nextLine());
-        System.out.println("Enter new category");
-        temporaryDto.setCategory(scanner.nextLine());
-        System.out.println("Enter new price");
-        temporaryDto.setPrice(new BigDecimal(scanner.nextLine()));
-        System.out.println("Enter new discount");
-        temporaryDto.setDiscount(new BigDecimal(scanner.nextLine()));
-        System.out.println(productService.updateByID(id, temporaryDto));
+
+        ProductDto dto = productService.updateByID(id, userProductBuilder());
+        System.out.println("Product updated succesfully." + '\n' + dto);
     }
 
     @Override
-    public String toString() {
+    public String getName() {
         return "Update product by ID";
     }
 }

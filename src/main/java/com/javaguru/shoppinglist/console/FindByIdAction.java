@@ -19,13 +19,13 @@ public class FindByIdAction implements MenuAction {
     @Override
     public void execute() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter product id: ");
+        System.out.println("Enter product ID: ");
         long id = scanner.nextLong();
         System.out.println(productService.findByID(id));
     }
 
     @Override
-    public String toString() {
+    public String getName() {
         return "Find product by ID";
     }
 }

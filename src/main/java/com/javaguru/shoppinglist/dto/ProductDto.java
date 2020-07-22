@@ -8,10 +8,18 @@ public class ProductDto {
     private Long id;
     private String name;
     private BigDecimal price;
-    private String category;
     private BigDecimal discount;
     private String description;
     private BigDecimal actualPrice;
+    private String sku;
+
+    public String getSku() {
+        return sku;
+    }
+
+    public void setSku(String sku) {
+        this.sku = sku;
+    }
 
     public Long getId() {
         return id;
@@ -35,14 +43,6 @@ public class ProductDto {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
     }
 
     public BigDecimal getDiscount() {
@@ -77,15 +77,15 @@ public class ProductDto {
         return Objects.equals(getId(), that.getId()) &&
                 Objects.equals(getName(), that.getName()) &&
                 Objects.equals(getPrice(), that.getPrice()) &&
-                Objects.equals(getCategory(), that.getCategory()) &&
                 Objects.equals(getDiscount(), that.getDiscount()) &&
+                Objects.equals(getSku(), that.getSku()) &&
                 Objects.equals(getDescription(), that.getDescription()) &&
                 Objects.equals(getActualPrice(), that.getActualPrice());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), getPrice(), getCategory(), getDiscount(), getDescription(), getActualPrice());
+        return Objects.hash(getId(), getName(), getPrice(), getDiscount(), getSku(), getDescription(), getActualPrice());
     }
 
     @Override
@@ -94,8 +94,8 @@ public class ProductDto {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", price=" + price +
-                ", category='" + category + '\'' +
                 ", discount=" + discount +
+                ", SKU=" + sku +
                 ", description='" + description + '\'' +
                 ", actualPrice=" + actualPrice +
                 '}';

@@ -13,8 +13,7 @@ public class ExitAction implements MenuAction {
     }
 
     @Override
-    public String toString() {
+    public String getName() {
         return "Exit";
     }
-
 }

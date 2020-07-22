@@ -16,17 +16,16 @@ public class NameValidationRule implements ProductValidationRule {
     }
 
     @Override
-    public void validate(ProductDto productDto) {
+    public void validate(ProductDto dto) {
+        checkProductNotNull(dto);
 
-        checkProductNotNull(productDto);
-
-        if (productDto.getName() == null) {
+        if (dto.getName() == null) {
             throw new IllegalArgumentException("Name should be not null");
         }
-        if (productDto.getName().length() < 3 || productDto.getName().length() > 32) {
+        if (dto.getName().length() < 3 || dto.getName().length() > 32) {
             throw new NameIllegalException("Name should be 3-32 characters long");
         }
-        if (productRepository.findByName(productDto.getName()).isPresent()) {
+        if (productRepository.isByName(dto.getName())) {
             throw new NameAlreadyExistsException("Name already exist");
         }
     }

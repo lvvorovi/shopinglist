@@ -10,13 +10,13 @@ import java.math.BigDecimal;
 public class PriceValidationRule implements ProductValidationRule {
 
     @Override
-    public void validate(ProductDto productDto) {
-        checkProductNotNull(productDto);
+    public void validate(ProductDto dto) {
+        checkProductNotNull(dto);
 
-        if (productDto.getPrice() == null) {
+        if (dto.getPrice() == null) {
             throw new IllegalArgumentException("Price should be not null");
         }
-        if ((productDto.getPrice().compareTo(new BigDecimal(0))) <= 0) {
+        if ((dto.getPrice().compareTo(new BigDecimal(0))) <= 0) {
             throw new PriceIllegalException("Price must be greater than 0");
         }
     }

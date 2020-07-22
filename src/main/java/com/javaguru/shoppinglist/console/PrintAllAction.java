@@ -1,6 +1,5 @@
 package com.javaguru.shoppinglist.console;
 
-import com.javaguru.shoppinglist.dto.ProductDto;
 import com.javaguru.shoppinglist.service.ProductService;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -16,14 +15,13 @@ public class PrintAllAction implements MenuAction {
     }
 
     @Override
-    public void execute() {
-        for (ProductDto productDto : productService.findAll()) {
-            System.out.println(productDto);
-        }
+    public String getName() {
+        return "Print all products";
     }
 
     @Override
-    public String toString() {
-        return "Print all products";
+    public void execute() {
+        productService.findAll().forEach(System.out::println);
     }
+
 }

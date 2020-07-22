@@ -13,18 +13,16 @@ import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.LinkedList;
 import java.util.List;
 
+import static com.javaguru.shoppinglist.TestProductConstructors.productDto;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ProductValidationServiceTest {
 
-    final ProductDto input = productDto();
     @Mock
     NameValidationRule nameValidationRule;
     @Mock
@@ -44,25 +42,15 @@ public class ProductValidationServiceTest {
         victim = new ProductValidationService(validationRules);
     }
 
-    private ProductDto productDto() {
-        ProductDto dto = new ProductDto();
-        dto.setName("name");
-        dto.setPrice(new BigDecimal(100));
-        dto.setDiscount(new BigDecimal(10));
-        dto.setActualPrice(new BigDecimal(90).setScale(2, RoundingMode.HALF_EVEN));
-        dto.setId(10L);
-        return dto;
-    }
-
     @Test
     public void shouldValidateForEachRule() {
-        victim.validate(input);
+        victim.validate(productDto());
 
         verify(nameValidationRule).validate(captor.capture());
         verify(discountValidationRule).validate(captor.capture());
         verify(priceValidationRule).validate(captor.capture());
 
-        captor.getAllValues().forEach(product -> assertEquals(input, product));
+        captor.getAllValues().forEach(product -> assertEquals(productDto(), product));
     }
 
 }

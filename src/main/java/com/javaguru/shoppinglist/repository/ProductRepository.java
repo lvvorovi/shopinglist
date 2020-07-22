@@ -2,19 +2,21 @@ package com.javaguru.shoppinglist.repository;
 
 import com.javaguru.shoppinglist.domain.ProductEntity;
 
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Optional;
 
 public interface ProductRepository {
-
-    void save(ProductEntity product);
+    ProductEntity save(ProductEntity product);
 
     Optional<ProductEntity> findByID(Long ID);
 
-    List<ProductEntity> findAll();
+    Optional<ArrayList<ProductEntity>> findAll();
 
-    Optional<ProductEntity> findByName(String name);
+    Boolean isByName(String name);
 
-    void deleteByID(Long id);
+    Boolean deleteByID(Long id);
 
+    ProductEntity updateById(Long id, ProductEntity entity);
+
+    Boolean isById(Long id);
 }

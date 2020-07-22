@@ -17,16 +17,21 @@ public class DeleteByIdAction implements MenuAction {
     }
 
     @Override
-    public void execute() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter product id: ");
-        long id = scanner.nextLong();
-        productService.deleteByID(id);
-        System.out.println("product deleted");
+    public String getName() {
+        return "Delete product by ID";
     }
 
     @Override
-    public String toString() {
-        return "Delete product by ID";
+    public void execute() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Enter product ID: ");
+        long id = Long.parseLong(scanner.nextLine());
+
+        if (productService.deleteByID(id)) {
+            System.out.println("Product wtih ID " + id + " deleted successfully.");
+        } else {
+            System.out.println("Product with ID " + id + " was not deleted.");
+        }
     }
 }
