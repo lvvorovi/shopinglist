@@ -19,4 +19,8 @@ public class ProductValidationService {
         validationRuleList.forEach(rule -> rule.validate(productDto));
     }
 
+    public void validate(ProductDto productDto, Boolean shouldNameBeValidatedForExistence) {
+        validationRuleList.forEach(rule -> rule.validate(productDto, shouldNameBeValidatedForExistence));
+    }
+
 }

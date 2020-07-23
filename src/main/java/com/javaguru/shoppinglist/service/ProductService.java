@@ -9,6 +9,7 @@ import com.javaguru.shoppinglist.service.validation.exceptions.ProductNotFoundEx
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class ProductService {
@@ -30,13 +31,13 @@ public class ProductService {
     }
 
     public ProductDto findByID(Long id) {
-        ProductEntity entity = productRepository.findByID(id)
+        ProductEntity entity = productRepository.findById(id)
                 .orElseThrow(() -> new ProductNotFoundException("Product with ID " + id + " not found"));
         return productMapper.toDto(entity);
     }
 
     public ArrayList<ProductDto> findAll() {
-        ArrayList<ProductEntity> entityList = productRepository.findAll()
+        List<ProductEntity> entityList = productRepository.findAll()
                 .orElseThrow(() -> new ProductNotFoundException("No Products found"));
         ArrayList<ProductDto> dtoList = new ArrayList<>();
         entityList.forEach(entity -> dtoList.add(productMapper.toDto(entity)));
@@ -44,19 +45,23 @@ public class ProductService {
     }
 
     public ProductDto updateByID(Long id, ProductDto dto) {
-        validationService.validate(dto);
-        ProductEntity updatedEntity = productRepository.updateById(id, productMapper.toEntity(dto));
-        return productMapper.toDto(updatedEntity);
+        validationService.validate(dto, false);
+        ProductEntity entity = productMapper.toEntity(dto);
+        if (productRepository.isById(id)) {
+            return productMapper.toDto(productRepository.updateById(id, entity));
+        } else {
+            throw new ProductNotFoundException("Product with ID " + id + " not found");
+        }
     }
 
     public Boolean deleteByID(Long id) {
-        try {
+/*        try {
             if (!productRepository.isById(id)) {
                 throw new ProductNotFoundException("Product with ID " + id + " not found");
             }
         } catch (NullPointerException e) {
             e.printStackTrace();
-        }
-        return productRepository.deleteByID(id);
+        }*/
+        return productRepository.deleteById(id);
     }
 }

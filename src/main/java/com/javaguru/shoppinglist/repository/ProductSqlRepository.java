@@ -1,6 +1,9 @@
 package com.javaguru.shoppinglist.repository;
 
 import com.javaguru.shoppinglist.domain.ProductEntity;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -12,6 +15,7 @@ import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.sql.Types;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -32,7 +36,7 @@ public class ProductSqlRepository implements ProductRepository {
     public ProductEntity save(ProductEntity entity) {
         String sqlSaveProduct = "INSERT INTO products (name, price, discount, sku, description) VALUES (?,?,?,?,?)";
         KeyHolder keyHolder = new GeneratedKeyHolder();
-
+        session().save(entity);
         dataBase.update(connection -> {
             PreparedStatement preparedStatement = connection.prepareStatement(sqlSaveProduct, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, entity.getName());
@@ -48,7 +52,7 @@ public class ProductSqlRepository implements ProductRepository {
     }
 
     @Override
-    public Optional<ProductEntity> findByID(Long id) {
+    public Optional<ProductEntity> findById(Long id) {
         String sqlGetProductById = "SELECT * FROM products WHERE id = ?";
         Object[] parameters = {id};
         int[] types = {Types.BIGINT};
@@ -69,13 +73,10 @@ public class ProductSqlRepository implements ProductRepository {
     }
 
     @Override
-    public Optional<ArrayList<ProductEntity>> findAll() {
+    public Optional<List<ProductEntity>> findAll() {
         String sqlFindAllProducts = "SELECT * FROM products";
-        ArrayList<ProductEntity> entityList = (ArrayList<ProductEntity>) dataBase.query(sqlFindAllProducts, rowMapper());
-        if (entityList.size() > 0) {
-            return Optional.of(entityList);
-        }
-        return Optional.empty();
+        List<ProductEntity> entityList = dataBase.query(sqlFindAllProducts, rowMapper());
+        return entityList.size() > 0 ? Optional.of(entityList) : Optional.empty();
     }
 
     @Override
@@ -111,8 +112,17 @@ public class ProductSqlRepository implements ProductRepository {
     }
 
     @Override
-    public Boolean deleteByID(Long id) {
+    public Boolean deleteById(Long id) {
         String deleteProductById = "DELETE FROM products WHERE id = " + id;
         return dataBase.update(deleteProductById) > 0;
     }
+
+    public Session session() {
+        Configuration configuration = new Configuration().configure("").addAnnotatedClass(ProductEntity.class);
+        SessionFactory sessionFactory = configuration.buildSessionFactory();
+        return sessionFactory.openSession();
+//        Transaction transaction = session.beginTransaction();
+    }
+
+
 }

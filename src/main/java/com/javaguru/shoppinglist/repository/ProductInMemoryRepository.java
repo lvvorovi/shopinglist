@@ -4,7 +4,10 @@ import com.javaguru.shoppinglist.domain.ProductEntity;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @Repository
 @Profile("inmemory")
@@ -14,20 +17,19 @@ public class ProductInMemoryRepository implements ProductRepository {
     private Long productIdSequence = 0L;
 
     @Override
-    public ProductEntity save(ProductEntity product) {
-        product.setId(productIdSequence++);
-        return repository.put(product.getId(), product);
+    public ProductEntity save(ProductEntity entity) {
+        entity.setId(productIdSequence++);
+        return repository.put(entity.getId(), entity);
     }
 
     @Override
-    public Optional<ProductEntity> findByID(Long id) {
+    public Optional<ProductEntity> findById(Long id) {
         return Optional.ofNullable(repository.get(id));
     }
 
     @Override
-    public Optional<ArrayList<ProductEntity>> findAll() {
-        ArrayList<ProductEntity> enttityList = (ArrayList<ProductEntity>)repository.values();
-        return Optional.of(enttityList);
+    public Optional<List<ProductEntity>> findAll() {
+        return Optional.of((List<ProductEntity>) repository.values());
     }
 
     @Override
@@ -41,7 +43,7 @@ public class ProductInMemoryRepository implements ProductRepository {
     }
 
     @Override
-    public Boolean deleteByID(Long id) {
+    public Boolean deleteById(Long id) {
         for (ProductEntity entry : repository.values()) {
             if (entry.getId().equals(id)) {
                 repository.remove(id);

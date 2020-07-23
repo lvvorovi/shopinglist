@@ -51,10 +51,10 @@ public class ProductServiceTest extends TestCase {
 
     @Test
     public void shouldRequestRepoToFindByID() {
-        when(productRepository.findByID(any())).thenReturn(Optional.of(productEntity()));
+        when(productRepository.findById(any())).thenReturn(Optional.of(productEntity()));
         when(productMapper.toDto(productEntity())).thenReturn(productDto());
         ProductDto dto = victim.findByID(0L);
-        verify(productRepository).findByID(any());
+        verify(productRepository).findById(any());
         verify(productMapper).toDto(any());
         assertEquals(productDto(), dto);
     }
@@ -86,12 +86,12 @@ public class ProductServiceTest extends TestCase {
         when(productRepository.isById(any())).thenReturn(true);
         victim.deleteByID(10L);
         verify(productRepository).isById(10L);
-        verify(productRepository).deleteByID(10L);
+        verify(productRepository).deleteById(10L);
     }
 
     @Test
     public void shouldThrowProductNotFoundExceptionWhenFindById() {
-        when(productRepository.findByID(any())).thenReturn(Optional.empty());
+        when(productRepository.findById(any())).thenReturn(Optional.empty());
         assertThatThrownBy(() -> victim.findByID(0L))
                 .isInstanceOf(ProductNotFoundException.class)
                 .hasMessage("Product with ID " + 0L + " not found");

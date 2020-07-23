@@ -1,15 +1,31 @@
 package com.javaguru.shoppinglist.domain;
 
+
+import org.hibernate.search.annotations.Field;
+
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Objects;
 
+@Entity
+@Table(name = "products")
 public class ProductEntity {
 
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
+    @Column(name = "name", nullable = false, unique = true)
+    @Field
     private String name;
+    @Column(name = "price", nullable = false)
     private BigDecimal price;
+    @Column(name = "discount", nullable = false)
     private BigDecimal discount;
+    @Column(name = "description")
     private String description;
+    @Field
+    @Column(name = "sku")
     private String sku;
 
     public String getSku() {
