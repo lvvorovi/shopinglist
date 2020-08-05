@@ -1,7 +1,7 @@
 package com.javaguru.shoppinglist.console;
 
-import com.javaguru.shoppinglist.service.validation.exceptions.ValidationException;
-import com.javaguru.shoppinglist.service.validation.exceptions.WrongMenuInputException;
+import com.javaguru.shoppinglist.domains.ValidationException;
+import com.javaguru.shoppinglist.domains.products.productService.validation.exceptions.WrongMenuInputException;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -26,7 +26,7 @@ public class Console {
                     System.out.println((i + 1) + ". " + actions.get(i).getName());
                 }
                 int userInput = Integer.parseInt(scanner.nextLine());
-                if (userInput < 1 || userInput > 6) {
+                if (userInput < 1 || userInput > actions.size()) {
                     throw new WrongMenuInputException("Wrong menu input. " +
                             "Please chose option from 1 to " + actions.size() +
                             " and try again." + '\n');

@@ -1,7 +1,6 @@
 package com.javaguru.shoppinglist;
 
-import com.javaguru.shoppinglist.domain.ProductEntity;
-import com.javaguru.shoppinglist.dto.ProductDto;
+import com.javaguru.shoppinglist.domains.products.ProductEntity;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -9,8 +8,8 @@ import java.util.ArrayList;
 
 public class TestProductConstructors {
 
-    public static ProductDto productDto() {
-        ProductDto dto = new ProductDto();
+    public static com.javaguru.shoppinglist.domains.products.productDto.ProductDto productDto() {
+        com.javaguru.shoppinglist.domains.products.productDto.ProductDto dto = new com.javaguru.shoppinglist.domains.products.productDto.ProductDto();
         dto.setName("name");
         dto.setPrice(new BigDecimal(100));
         dto.setDiscount(new BigDecimal(10));
@@ -32,23 +31,23 @@ public class TestProductConstructors {
         return entity;
     }
 
-    public static ProductDto productDtoAllValuesTooSmall() {
-        ProductDto dto = new ProductDto();
+    public static com.javaguru.shoppinglist.domains.products.productDto.ProductDto productDtoAllValuesTooSmall() {
+        com.javaguru.shoppinglist.domains.products.productDto.ProductDto dto = new com.javaguru.shoppinglist.domains.products.productDto.ProductDto();
         dto.setDiscount(new BigDecimal(-2));
         dto.setPrice(new BigDecimal(0));
         dto.setName("ab");
         return dto;
     }
 
-    public static ProductDto productDtoAllValuesTooBig() {
-        ProductDto dto = productDto();
+    public static com.javaguru.shoppinglist.domains.products.productDto.ProductDto productDtoAllValuesTooBig() {
+        com.javaguru.shoppinglist.domains.products.productDto.ProductDto dto = productDto();
         dto.setDiscount(new BigDecimal(101));
         dto.setName("123456789012345678901234567890123");
         return dto;
     }
 
-    public static ProductDto productDtoAllValuesNull() {
-        ProductDto dto = productDto();
+    public static com.javaguru.shoppinglist.domains.products.productDto.ProductDto productDtoAllValuesNull() {
+        com.javaguru.shoppinglist.domains.products.productDto.ProductDto dto = productDto();
         dto.setDiscount(null);
         dto.setPrice(null);
         dto.setSku(null);
@@ -60,22 +59,22 @@ public class TestProductConstructors {
         return dto;
     }
 
-    public static ProductDto productDtoLowPriceNotZeroDiscount() {
-        ProductDto dto = productDto();
+    public static com.javaguru.shoppinglist.domains.products.productDto.ProductDto productDtoLowPriceNotZeroDiscount() {
+        com.javaguru.shoppinglist.domains.products.productDto.ProductDto dto = productDto();
         dto.setPrice(new BigDecimal(10));
         dto.setDiscount(new BigDecimal(1));
         return dto;
     }
 
-    public static ProductDto productDtoPriceOneHundredDiscountTen() {
-        ProductDto dto = productDto();
+    public static com.javaguru.shoppinglist.domains.products.productDto.ProductDto productDtoPriceOneHundredDiscountTen() {
+        com.javaguru.shoppinglist.domains.products.productDto.ProductDto dto = productDto();
         dto.setPrice(new BigDecimal(100));
         dto.setDiscount(new BigDecimal(10));
         return dto;
     }
 
-    public static ProductDto productDtoPriceTenDiscountZero() {
-        ProductDto dto = productDto();
+    public static com.javaguru.shoppinglist.domains.products.productDto.ProductDto productDtoPriceTenDiscountZero() {
+        com.javaguru.shoppinglist.domains.products.productDto.ProductDto dto = productDto();
         dto.setPrice(new BigDecimal(10));
         dto.setDiscount(new BigDecimal(0));
         return dto;
@@ -87,14 +86,14 @@ public class TestProductConstructors {
         return listEntity;
     }
 
-    public static ArrayList<ProductDto> dtoList() {
-        ArrayList<ProductDto> listDto = new ArrayList<>();
+    public static ArrayList<com.javaguru.shoppinglist.domains.products.productDto.ProductDto> dtoList() {
+        ArrayList<com.javaguru.shoppinglist.domains.products.productDto.ProductDto> listDto = new ArrayList<>();
         listDto.add(productDto());
         return listDto;
     }
 
 
-    public static ProductDto productDtoNull() {
+    public static com.javaguru.shoppinglist.domains.products.productDto.ProductDto productDtoNull() {
         return null;
     }
 }
