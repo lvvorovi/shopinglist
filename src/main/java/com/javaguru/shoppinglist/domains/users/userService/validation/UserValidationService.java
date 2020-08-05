@@ -1,6 +1,6 @@
 package com.javaguru.shoppinglist.domains.users.userService.validation;
 
-import com.javaguru.shoppinglist.domains.users.dto.UserDto;
+import com.javaguru.shoppinglist.domains.users.UserDto;
 import com.javaguru.shoppinglist.domains.users.userService.validation.rules.UserValidationRules;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +16,6 @@ public class UserValidationService {
     }
 
     public void validate(UserDto dto) {
-        for (UserValidationRules rule : userValidationRules) {
-            rule.validate(dto);
-        }
+        userValidationRules.forEach(rule -> rule.validate(dto));
     }
 }

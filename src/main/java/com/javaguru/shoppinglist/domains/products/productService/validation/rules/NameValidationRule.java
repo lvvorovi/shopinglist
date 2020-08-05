@@ -5,9 +5,11 @@ import com.javaguru.shoppinglist.domains.products.productDto.ProductDto;
 import com.javaguru.shoppinglist.domains.products.productRepository.ProductRepository;
 import com.javaguru.shoppinglist.domains.products.productService.validation.exceptions.NameAlreadyExistsException;
 import com.javaguru.shoppinglist.domains.products.productService.validation.exceptions.NameIllegalException;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 @Component
+@Order(100)
 public class NameValidationRule implements ProductValidationRule {
 
     private final ProductRepository productRepository;

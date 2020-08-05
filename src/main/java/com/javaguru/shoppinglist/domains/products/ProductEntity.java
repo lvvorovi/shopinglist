@@ -1,7 +1,7 @@
 package com.javaguru.shoppinglist.domains.products;
 
 
-import com.javaguru.shoppinglist.domains.productLilst.ProductListEntity;
+import com.javaguru.shoppinglist.domains.userItems.UserItemEntity;
 import org.hibernate.search.annotations.Field;
 
 import javax.persistence.*;
@@ -40,7 +40,7 @@ public class ProductEntity {
     private Timestamp timestamp;
 
     @OneToMany(mappedBy = "product")
-    private Set<ProductListEntity> items;
+    private Set<UserItemEntity> items;
 
     public ProductEntity() {
     }
@@ -101,11 +101,11 @@ public class ProductEntity {
         this.timestamp = timestamp;
     }
 
-    public Set<ProductListEntity> getItems() {
+    public Set<UserItemEntity> getItems() {
         return items;
     }
 
-    public void setItems(Set<ProductListEntity> items) {
+    public void setItems(Set<UserItemEntity> items) {
         this.items = items;
     }
 

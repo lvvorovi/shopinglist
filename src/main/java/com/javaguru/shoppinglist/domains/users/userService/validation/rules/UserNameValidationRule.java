@@ -1,10 +1,12 @@
 package com.javaguru.shoppinglist.domains.users.userService.validation.rules;
 
-import com.javaguru.shoppinglist.domains.users.dto.UserDto;
+import com.javaguru.shoppinglist.domains.users.UserDto;
 import com.javaguru.shoppinglist.domains.users.userService.validation.exceptions.UserNameException;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 @Component
+@Order(1)
 public class UserNameValidationRule implements UserValidationRules {
 
     @Override

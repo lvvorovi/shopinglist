@@ -1,7 +1,7 @@
 package com.javaguru.shoppinglist.domains.users.userMappers;
 
 import com.javaguru.shoppinglist.domains.users.UserEntity;
-import com.javaguru.shoppinglist.domains.users.dto.UserDto;
+import com.javaguru.shoppinglist.domains.users.UserDto;
 import org.springframework.stereotype.Component;
 
 @Component

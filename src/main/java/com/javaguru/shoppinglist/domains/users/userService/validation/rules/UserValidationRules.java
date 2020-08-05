@@ -1,6 +1,6 @@
 package com.javaguru.shoppinglist.domains.users.userService.validation.rules;
 
-import com.javaguru.shoppinglist.domains.users.dto.UserDto;
+import com.javaguru.shoppinglist.domains.users.UserDto;
 import com.javaguru.shoppinglist.domains.users.userService.validation.exceptions.UserNullException;
 import org.springframework.stereotype.Component;
 

@@ -1,12 +1,14 @@
 package com.javaguru.shoppinglist.domains.users.userService.validation.rules;
 
 import com.javaguru.shoppinglist.domains.users.UserEntity;
-import com.javaguru.shoppinglist.domains.users.dto.UserDto;
+import com.javaguru.shoppinglist.domains.users.UserDto;
 import com.javaguru.shoppinglist.domains.users.userRepository.UserHibernateRepository;
 import com.javaguru.shoppinglist.domains.users.userService.validation.exceptions.UserEmailException;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 @Component
+@Order(100)
 public class UserEmailValidationRule implements UserValidationRules {
 
     private final UserHibernateRepository userRepository;

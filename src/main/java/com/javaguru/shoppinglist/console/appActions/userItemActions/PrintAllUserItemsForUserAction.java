@@ -1,7 +1,7 @@
-package com.javaguru.shoppinglist.console.appActions.productListActions;
+package com.javaguru.shoppinglist.console.appActions.userItemActions;
 
-import com.javaguru.shoppinglist.domains.productLilst.productListDto.ProductListDto;
-import com.javaguru.shoppinglist.domains.productLilst.productListService.ProductListService;
+import com.javaguru.shoppinglist.domains.userItems.UserItemDto;
+import com.javaguru.shoppinglist.domains.userItems.productListService.ProductListService;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -9,12 +9,12 @@ import java.util.List;
 import java.util.Scanner;
 
 @Component
-@Order(11)
-public class PrintProductListForUserAction implements ProductListAction {
+@Order(9)
+public class PrintAllUserItemsForUserAction implements UserItemMenuAction {
 
     private final ProductListService productListService;
 
-    public PrintProductListForUserAction(ProductListService productListService) {
+    public PrintAllUserItemsForUserAction(ProductListService productListService) {
         this.productListService = productListService;
     }
 
@@ -25,7 +25,7 @@ public class PrintProductListForUserAction implements ProductListAction {
         System.out.println("Enter user id");
         Long userId = Long.parseLong(scanner.nextLine());
 
-        List<ProductListDto> dtoList = productListService.findByUserId(userId);
+        List<UserItemDto> dtoList = productListService.findByUserId(userId);
 
         dtoList.forEach(System.out::println);
     }

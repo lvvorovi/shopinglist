@@ -1,7 +1,7 @@
 package com.javaguru.shoppinglist.console.appActions.userActions;
 
 import com.javaguru.shoppinglist.console.MenuAction;
-import com.javaguru.shoppinglist.domains.users.dto.UserDto;
+import com.javaguru.shoppinglist.domains.users.UserDto;
 
 import java.util.Scanner;
 

@@ -1,7 +1,7 @@
 package com.javaguru.shoppinglist.domains.users.userService;
 
 import com.javaguru.shoppinglist.domains.users.UserEntity;
-import com.javaguru.shoppinglist.domains.users.dto.UserDto;
+import com.javaguru.shoppinglist.domains.users.UserDto;
 import com.javaguru.shoppinglist.domains.users.userMappers.UserMapper;
 import com.javaguru.shoppinglist.domains.users.userRepository.UserHibernateRepository;
 import com.javaguru.shoppinglist.domains.users.userService.validation.UserValidationService;

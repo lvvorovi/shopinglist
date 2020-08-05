@@ -1,6 +1,6 @@
 package com.javaguru.shoppinglist.domains.users;
 
-import com.javaguru.shoppinglist.domains.productLilst.ProductListEntity;
+import com.javaguru.shoppinglist.domains.userItems.UserItemEntity;
 import org.hibernate.search.annotations.Field;
 
 import javax.persistence.*;
@@ -32,7 +32,7 @@ public class UserEntity {
     private String phone;
 
     @OneToMany(mappedBy = "user")
-    private Set<ProductListEntity> items;
+    private Set<UserItemEntity> items;
 
     public UserEntity() {
     }
@@ -77,11 +77,11 @@ public class UserEntity {
         this.phone = phone;
     }
 
-    public Set<ProductListEntity> getItems() {
+    public Set<UserItemEntity> getItems() {
         return items;
     }
 
-    public void setItems(Set<ProductListEntity> items) {
+    public void setItems(Set<UserItemEntity> items) {
         this.items = items;
     }
 

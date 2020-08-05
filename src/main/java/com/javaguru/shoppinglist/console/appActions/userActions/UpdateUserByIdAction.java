@@ -1,6 +1,6 @@
 package com.javaguru.shoppinglist.console.appActions.userActions;
 
-import com.javaguru.shoppinglist.domains.users.dto.UserDto;
+import com.javaguru.shoppinglist.domains.users.UserDto;
 import com.javaguru.shoppinglist.domains.users.userService.UserService;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;

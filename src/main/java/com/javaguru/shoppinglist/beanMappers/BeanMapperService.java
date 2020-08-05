@@ -1,6 +1,6 @@
 package com.javaguru.shoppinglist.beanMappers;
 
-import com.javaguru.shoppinglist.domains.productLilst.productListMapper.ProductListMapper;
+import com.javaguru.shoppinglist.domains.userItems.userItemMapper.UserItemMapper;
 import com.javaguru.shoppinglist.domains.products.productMappers.ProductMapper;
 import com.javaguru.shoppinglist.domains.users.userMappers.UserMapper;
 import org.springframework.stereotype.Component;
@@ -10,9 +10,9 @@ public class BeanMapperService {
 
     private final UserMapper userMapper;
     private final ProductMapper productMapper;
-    private final ProductListMapper productListMapper;
+    private final UserItemMapper productListMapper;
 
-    public BeanMapperService(UserMapper userMapper, ProductMapper productMapper, ProductListMapper productListMapper) {
+    public BeanMapperService(UserMapper userMapper, ProductMapper productMapper, UserItemMapper productListMapper) {
         this.userMapper = userMapper;
         this.productMapper = productMapper;
         this.productListMapper = productListMapper;
@@ -26,7 +26,7 @@ public class BeanMapperService {
         return productMapper;
     }
 
-    public ProductListMapper getProductListMapper() {
+    public UserItemMapper getProductListMapper() {
         return productListMapper;
     }
 

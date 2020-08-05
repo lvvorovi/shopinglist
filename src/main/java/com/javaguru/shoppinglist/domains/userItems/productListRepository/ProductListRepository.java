@@ -1,6 +1,6 @@
-package com.javaguru.shoppinglist.domains.productLilst.productListRepository;
+package com.javaguru.shoppinglist.domains.userItems.productListRepository;
 
-import com.javaguru.shoppinglist.domains.productLilst.ProductListEntity;
+import com.javaguru.shoppinglist.domains.userItems.UserItemEntity;
 import com.javaguru.shoppinglist.domains.products.ProductEntity;
 import com.javaguru.shoppinglist.domains.users.UserEntity;
 import org.hibernate.Session;
@@ -28,13 +28,13 @@ public class ProductListRepository {
         return sessionFactory.getCurrentSession();
     }
 
-    public ProductListEntity save(ProductListEntity entity) {
+    public UserItemEntity save(UserItemEntity entity) {
         Long generatedId = (Long) dataBase().save(entity);
         entity.setId(generatedId);
         return entity;
     }
 
-    public ProductListEntity changeQuantity(ProductListEntity entity) {
+    public UserItemEntity changeQuantity(UserItemEntity entity) {
         dataBase().merge(entity);
         return entity;
     }
@@ -47,26 +47,26 @@ public class ProductListRepository {
         return entity != null;
     }*/
 
-    public Optional<ProductListEntity> getIfPresent(UserEntity userEntity, ProductEntity productEntity) {
+    public Optional<UserItemEntity> getIfPresent(UserEntity userEntity, ProductEntity productEntity) {
         Criterion productIdCriterion = Restrictions.eq("product", productEntity);
         Criterion userIdCriterion = Restrictions.eq("user", userEntity);
-        ProductListEntity entity = (ProductListEntity) dataBase().createCriteria(ProductListEntity.class)
+        UserItemEntity entity = (UserItemEntity) dataBase().createCriteria(UserItemEntity.class)
                 .add(Restrictions.conjunction().add(userIdCriterion).add(productIdCriterion)).uniqueResult();
         return entity != null ? Optional.of(entity) : Optional.empty();
     }
 
-    public Optional<List<ProductListEntity>> findByUserId(UserEntity entity) {
-        List<ProductListEntity> entityList = dataBase().createCriteria(ProductListEntity.class)
+    public Optional<List<UserItemEntity>> findByUserId(UserEntity entity) {
+        List<UserItemEntity> entityList = dataBase().createCriteria(UserItemEntity.class)
                 .add(Restrictions.eq("user", entity)).list();
         return entityList.size() > 0 ? Optional.of(entityList) : Optional.empty();
     }
 
-    public void delete(ProductListEntity entity) {
+    public void delete(UserItemEntity entity) {
         dataBase().remove(entity);
     }
 
     public void deleteAll(Long userId) {
-        Query query = dataBase().createQuery("DELETE ProductListEntity WHERE user = " + userId);
+        Query query = dataBase().createQuery("DELETE UserItemEntity WHERE user = " + userId);
         query.executeUpdate();
     }
 

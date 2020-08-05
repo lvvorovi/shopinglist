@@ -1,6 +1,6 @@
-package com.javaguru.shoppinglist.console.appActions.productListActions;
+package com.javaguru.shoppinglist.console.appActions.userItemActions;
 
-import com.javaguru.shoppinglist.domains.productLilst.productListService.ProductListService;
+import com.javaguru.shoppinglist.domains.userItems.productListService.ProductListService;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -8,11 +8,11 @@ import java.util.Scanner;
 
 @Component
 @Order(10)
-public class ChangeProductListQuantityAction implements ProductListAction {
+public class ChangeUserItemQuantityAction implements UserItemMenuAction {
 
     private final ProductListService productListService;
 
-    public ChangeProductListQuantityAction(ProductListService productListService) {
+    public ChangeUserItemQuantityAction(ProductListService productListService) {
         this.productListService = productListService;
     }
 

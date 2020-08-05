@@ -15,13 +15,13 @@ public class PrintAllProductsAction implements ProductMenuAction {
     }
 
     @Override
-    public String getName() {
-        return "Print all products";
+    public void execute() {
+        productService.findAll().forEach(System.out::println);
     }
 
     @Override
-    public void execute() {
-        productService.findAll().forEach(System.out::println);
+    public String getName() {
+        return "Print all products";
     }
 
 }

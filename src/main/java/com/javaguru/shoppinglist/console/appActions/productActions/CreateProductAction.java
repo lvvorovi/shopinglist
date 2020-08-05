@@ -15,13 +15,13 @@ public class CreateProductAction implements ProductMenuAction {
     }
 
     @Override
-    public String getName() {
-        return "Create Product";
+    public void execute() {
+        System.out.println(productService.save(consoleProductBuilder()));
     }
 
     @Override
-    public void execute() {
-        System.out.println(productService.save(consoleProductBuilder()));
+    public String getName() {
+        return "Create Product";
     }
 
 }

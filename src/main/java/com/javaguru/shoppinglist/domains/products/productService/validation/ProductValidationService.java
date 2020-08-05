@@ -16,9 +16,7 @@ public class ProductValidationService {
     }
 
     public void validate(ProductDto dto) {
-        for (ProductValidationRule rule : productValidationRules) {
-            rule.validate(dto);
-        }
+        productValidationRules.forEach(rule -> rule.validate(dto));
     }
 
 }

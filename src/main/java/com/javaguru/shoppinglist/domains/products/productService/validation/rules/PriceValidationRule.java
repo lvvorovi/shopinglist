@@ -2,11 +2,13 @@ package com.javaguru.shoppinglist.domains.products.productService.validation.rul
 
 import com.javaguru.shoppinglist.domains.products.productDto.ProductDto;
 import com.javaguru.shoppinglist.domains.products.productService.validation.exceptions.PriceIllegalException;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 
 @Component
+@Order(2)
 public class PriceValidationRule implements ProductValidationRule {
 
     @Override

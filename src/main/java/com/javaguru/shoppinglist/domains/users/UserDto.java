@@ -1,4 +1,4 @@
-package com.javaguru.shoppinglist.domains.users.dto;
+package com.javaguru.shoppinglist.domains.users;
 
 import com.javaguru.shoppinglist.domains.products.ProductEntity;
 
@@ -89,7 +89,6 @@ public class UserDto {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
                 ", phone='" + phone + '\'' +
                 '}';
     }

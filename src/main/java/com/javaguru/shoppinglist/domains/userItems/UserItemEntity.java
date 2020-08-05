@@ -1,4 +1,4 @@
-package com.javaguru.shoppinglist.domains.productLilst;
+package com.javaguru.shoppinglist.domains.userItems;
 
 import com.javaguru.shoppinglist.domains.products.ProductEntity;
 import com.javaguru.shoppinglist.domains.users.UserEntity;
@@ -8,7 +8,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "user_items")
-public class ProductListEntity {
+public class UserItemEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +25,7 @@ public class ProductListEntity {
     @Column(name = "quantity")
     int quantity;
 
-    public ProductListEntity() {
+    public UserItemEntity() {
     }
 
     public Long getId() {
@@ -64,7 +64,7 @@ public class ProductListEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ProductListEntity productListEntity = (ProductListEntity) o;
+        UserItemEntity productListEntity = (UserItemEntity) o;
         return quantity == productListEntity.quantity &&
                 Objects.equals(id, productListEntity.id) &&
                 Objects.equals(user, productListEntity.user) &&
@@ -78,7 +78,7 @@ public class ProductListEntity {
 
     @Override
     public String toString() {
-        return "ProductListEntity{" +
+        return "UserItemEntity{" +
                 "id=" + id +
                 ", user=" + user +
                 ", product=" + product +

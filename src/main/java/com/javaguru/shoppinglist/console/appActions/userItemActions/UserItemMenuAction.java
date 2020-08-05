@@ -1,8 +1,8 @@
-package com.javaguru.shoppinglist.console.appActions.productListActions;
+package com.javaguru.shoppinglist.console.appActions.userItemActions;
 
 import com.javaguru.shoppinglist.console.MenuAction;
 
-public interface ProductListAction extends MenuAction {
+public interface UserItemMenuAction extends MenuAction {
 
     @Override
     void execute();
