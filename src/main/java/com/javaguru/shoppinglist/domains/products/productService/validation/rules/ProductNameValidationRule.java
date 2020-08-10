@@ -1,7 +1,7 @@
 package com.javaguru.shoppinglist.domains.products.productService.validation.rules;
 
 import com.javaguru.shoppinglist.domains.products.ProductEntity;
-import com.javaguru.shoppinglist.domains.products.productDto.ProductDto;
+import com.javaguru.shoppinglist.domains.products.ProductDto;
 import com.javaguru.shoppinglist.domains.products.productRepository.ProductRepository;
 import com.javaguru.shoppinglist.domains.products.productService.validation.exceptions.NameAlreadyExistsException;
 import com.javaguru.shoppinglist.domains.products.productService.validation.exceptions.NameIllegalException;

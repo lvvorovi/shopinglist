@@ -6,7 +6,7 @@ import com.javaguru.shoppinglist.domains.userItems.UserItemDto;
 import com.javaguru.shoppinglist.domains.userItems.productListRepository.ProductListRepository;
 import com.javaguru.shoppinglist.domains.userItems.productListService.validation.ProductListValidationService;
 import com.javaguru.shoppinglist.domains.userItems.productListService.validation.exceptions.ProductListNotFoundException;
-import com.javaguru.shoppinglist.domains.products.productDto.ProductDto;
+import com.javaguru.shoppinglist.domains.products.ProductDto;
 import com.javaguru.shoppinglist.domains.products.productService.ProductService;
 import com.javaguru.shoppinglist.domains.users.UserEntity;
 import com.javaguru.shoppinglist.domains.users.UserDto;

@@ -1,6 +1,6 @@
 package com.javaguru.shoppinglist.domains.products.productService.validation.rules;
 
-import com.javaguru.shoppinglist.domains.products.productDto.ProductDto;
+import com.javaguru.shoppinglist.domains.products.ProductDto;
 import com.javaguru.shoppinglist.domains.products.productService.validation.exceptions.PriceIllegalException;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
